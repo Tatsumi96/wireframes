@@ -68,10 +68,10 @@ const ChatbotWidget = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50 font-['Outfit']">
       {isOpen && (
-        <div className="bg-white border border-[#eaeaea] shadow-xl rounded-2xl w-80 mb-4 overflow-hidden flex flex-col transition-all">
+        <div className="bg-white border border-[#eaeaea] shadow-xl rounded-md w-80 mb-4 overflow-hidden flex flex-col transition-all">
           <div className="bg-[#111] text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-400"></div>
+              <div className="w-2 h-2 rounded-md bg-green-400"></div>
               <span className="text-sm font-medium">Support Client</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="text-[#888] hover:text-white">
@@ -79,16 +79,16 @@ const ChatbotWidget = () => {
             </button>
           </div>
           <div className="h-64 bg-[#fafafa] p-4 flex flex-col gap-3 overflow-y-auto">
-            <div className="bg-white border border-[#eaeaea] p-3 rounded-2xl rounded-tl-sm text-xs text-[#333] self-start max-w-[80%] shadow-sm">
+            <div className="bg-white border border-[#eaeaea] p-3 rounded-md rounded-tl-sm text-xs text-[#333] self-start max-w-[80%] shadow-sm">
               Bonjour ! Comment puis-je vous aider avec votre réservation ?
             </div>
-            <div className="bg-[#111] text-white p-3 rounded-2xl rounded-tr-sm text-xs self-end max-w-[80%] shadow-sm">
+            <div className="bg-[#111] text-white p-3 rounded-md rounded-tr-sm text-xs self-end max-w-[80%] shadow-sm">
               Je cherche un logement avec vue sur la mer.
             </div>
           </div>
           <div className="p-3 bg-white border-t border-[#eaeaea] flex items-center gap-2">
-            <input type="text" placeholder="Écrivez votre message..." className="flex-1 text-xs outline-none bg-[#f5f5f5] px-3 py-2 rounded-full" />
-            <button className="bg-[#111] text-white p-2 rounded-full flex items-center justify-center">
+            <input type="text" placeholder="Écrivez votre message..." className="flex-1 text-xs outline-none bg-[#f5f5f5] px-3 py-2 rounded-md" />
+            <button className="bg-[#111] text-white p-2 rounded-md flex items-center justify-center">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>
             </button>
           </div>
@@ -96,7 +96,7 @@ const ChatbotWidget = () => {
       )}
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className={`w-14 h-14 rounded-full bg-[#111] text-white shadow-lg flex items-center justify-center transition-transform hover:scale-105 ${isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`}
+        className={`w-14 h-14 rounded-md bg-[#111] text-white shadow-lg flex items-center justify-center transition-transform hover:scale-105 ${isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`}
         style={{ position: isOpen ? 'absolute' : 'relative', bottom: isOpen ? 0 : 'auto', right: isOpen ? 0 : 'auto' }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -104,7 +104,7 @@ const ChatbotWidget = () => {
       {isOpen && (
         <button 
           onClick={() => setIsOpen(false)} 
-          className="w-14 h-14 rounded-full bg-white border border-[#eaeaea] text-[#111] shadow-lg flex items-center justify-center transition-transform hover:scale-105 absolute bottom-0 right-0"
+          className="w-14 h-14 rounded-md bg-white border border-[#eaeaea] text-[#111] shadow-lg flex items-center justify-center transition-transform hover:scale-105 absolute bottom-0 right-0"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
