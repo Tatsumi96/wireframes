@@ -116,7 +116,7 @@ export const Footer: React.FC = () => (
         ))}
       </div>
       <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-border)' }}>© 2024 Séjours · Tous droits réservés</p>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-taupe)' }}>© {new Date().getFullYear()} Séjours · Tous droits réservés</p>
       </div>
     </div>
   </footer>
