@@ -306,8 +306,10 @@ const StepBar = ({ steps, current }: { steps: string[]; current: number }) => (
 // PUBLIC SCREENS
 // ─────────────────────────────────────────────────────────
 
-const ScreenHome = ({ mobile }: { mobile: boolean }) => {
-  if (mobile) return (
+const ScreenHome = () => {
+  return (
+    <>
+      <div className="block md:hidden">
     <div className="bg-[#f7f7f7] min-h-screen flex flex-col">
       <PubHeaderMob />
       <WFImg label="[ HERO ]" h="h-52" src="https://images.unsplash.com/photo-1542314831-c6a4d27ece08?auto=format&fit=crop&q=80&w=1200" />
@@ -338,9 +340,8 @@ const ScreenHome = ({ mobile }: { mobile: boolean }) => {
         ))}
       </div>
     </div>
-  );
-
-  return (
+      </div>
+      <div className="hidden md:block">
     <div className="bg-[#f7f7f7] min-h-screen">
       <PubHeader />
       <div className="relative">
@@ -403,11 +404,15 @@ const ScreenHome = ({ mobile }: { mobile: boolean }) => {
       </div>
       <PubFooter />
     </div>
+      </div>
+    </>
   );
 };
 
-const ScreenSearch = ({ mobile }: { mobile: boolean }) => {
-  if (mobile) return (
+const ScreenSearch = () => {
+  return (
+    <>
+      <div className="block md:hidden">
     <div className="bg-[#f7f7f7] min-h-screen">
       <PubHeaderMob />
       <div className="p-2.5 bg-white border-b border-[#d0d0d0] space-y-2">
@@ -435,9 +440,8 @@ const ScreenSearch = ({ mobile }: { mobile: boolean }) => {
         ))}
       </div>
     </div>
-  );
-
-  return (
+      </div>
+      <div className="hidden md:block">
     <div className="bg-[#f7f7f7] min-h-screen">
       <PubHeader />
       <div className="bg-white border-b border-[#d0d0d0] px-5 py-2.5">
@@ -487,11 +491,15 @@ const ScreenSearch = ({ mobile }: { mobile: boolean }) => {
       </div>
       <PubFooter />
     </div>
+      </div>
+    </>
   );
 };
 
-const ScreenProperty = ({ mobile }: { mobile: boolean }) => {
-  if (mobile) return (
+const ScreenProperty = () => {
+  return (
+    <>
+      <div className="block md:hidden">
     <div className="bg-[#f7f7f7] min-h-screen">
       <PubHeaderMob />
       <WFImg label="[ GALERIE — swipe ]" h="h-52" src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&q=80&w=600" />
@@ -518,9 +526,8 @@ const ScreenProperty = ({ mobile }: { mobile: boolean }) => {
         ))}
       </div>
     </div>
-  );
-
-  return (
+      </div>
+      <div className="hidden md:block">
     <div className="bg-[#f7f7f7] min-h-screen">
       <PubHeader />
       <div className="max-w-5xl mx-auto px-5 py-6">
@@ -597,15 +604,17 @@ const ScreenProperty = ({ mobile }: { mobile: boolean }) => {
       </div>
       <PubFooter />
     </div>
+      </div>
+    </>
   );
 };
 
-const ScreenBooking1 = ({ mobile }: { mobile: boolean }) => (
+const ScreenBooking1 = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <div className="max-w-2xl mx-auto px-5 py-6">
       <StepBar steps={["1. Dates & voyageurs","2. Récapitulatif","3. Paiement"]} current={0} />
-      <div className={`grid gap-5 ${mobile ? "grid-cols-1" : "grid-cols-[1fr_220px]"}`}>
+      <div className={`grid gap-5 $"grid-cols-1 md:grid-cols-[1fr_220px]"`}>
         <div className="bg-white border border-[#d0d0d0] p-4 space-y-3">
           <WFSection text="Sélection des dates" />
           <WFBox label="[ CALENDRIER INTERACTIF ]\nSélection d'une plage de dates\nDates bloquées / disponibles" h="h-60" />
@@ -636,9 +645,9 @@ const ScreenBooking1 = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenBooking2 = ({ mobile }: { mobile: boolean }) => (
+const ScreenBooking2 = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <div className="max-w-2xl mx-auto px-5 py-6">
       <StepBar steps={["1. Dates & voyageurs","2. Récapitulatif","3. Paiement"]} current={1} />
       <div className="bg-white border border-[#d0d0d0] p-5 space-y-4">
@@ -677,12 +686,12 @@ const ScreenBooking2 = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenBooking3 = ({ mobile }: { mobile: boolean }) => (
+const ScreenBooking3 = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <div className="max-w-2xl mx-auto px-5 py-6">
       <StepBar steps={["1. Dates & voyageurs","2. Récapitulatif","3. Paiement"]} current={2} />
-      <div className={`grid gap-5 ${mobile ? "grid-cols-1" : "grid-cols-[1fr_200px]"}`}>
+      <div className={`grid gap-5 $"grid-cols-1 md:grid-cols-[1fr_200px]"`}>
         <div className="bg-white border border-[#d0d0d0] p-5 space-y-3">
           <WFSection text="Paiement sécurisé" />
           <WFRow className="items-center gap-3">
@@ -723,12 +732,12 @@ const ScreenBooking3 = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenContact = ({ mobile }: { mobile: boolean }) => (
+const ScreenContact = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <div className="max-w-3xl mx-auto px-5 py-8">
       <WFSection text="Contact" />
-      <div className={`grid gap-6 mt-3 ${mobile ? "grid-cols-1" : "grid-cols-2"}`}>
+      <div className={`grid gap-6 mt-3 $"grid-cols-1 md:grid-cols-2"`}>
         <div className="bg-white border border-[#d0d0d0] p-4 space-y-3">
           <WFSection text="Formulaire de contact" />
           <WFInput label="Nom complet" />
@@ -748,9 +757,9 @@ const ScreenContact = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAbout = ({ mobile }: { mobile: boolean }) => (
+const ScreenAbout = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <WFImg label="[ HERO — À PROPOS ]" h="h-40" className="w-full" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1200" />
     <div className="max-w-4xl mx-auto px-5 py-8 space-y-6">
       <WFSection text="Notre histoire" />
@@ -776,9 +785,9 @@ const ScreenAbout = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenLegal = ({ mobile }: { mobile: boolean }) => (
+const ScreenLegal = () => (
   <div className="bg-[#f7f7f7] min-h-screen">
-    {mobile ? <PubHeaderMob /> : <PubHeader />}
+    <><div className="block md:hidden"><PubHeaderMob /></div><div className="hidden md:block"><PubHeader /></div></>
     <div className="max-w-3xl mx-auto px-5 py-8">
       <WFSection text="Documents légaux" />
       <WFRow className="mb-4 gap-1">
@@ -805,7 +814,7 @@ const ScreenLegal = ({ mobile }: { mobile: boolean }) => (
 
 const clientNav = ["Dashboard", "Mes réservations", "Paiements", "Paramètres"];
 
-const ScreenClientDashboard = ({ mobile }: { mobile: boolean }) => (
+const ScreenClientDashboard = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Client" items={clientNav} active={0} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -848,14 +857,14 @@ const ScreenClientDashboard = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenClientBooking = ({ mobile }: { mobile: boolean }) => (
+const ScreenClientBooking = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Client" items={clientNav} active={1} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
       <WFBreadcrumb path="← Mes réservations" />
       <WFLabel text="Détail de la réservation #XXXXXX" className="text-[#444] text-xs" />
-      <div className={`grid gap-4 ${mobile ? "grid-cols-1" : "grid-cols-[1fr_260px]"}`}>
+      <div className={`grid gap-4 $"grid-cols-1 md:grid-cols-[1fr_260px]"`}>
         <WFCol>
           <div className="bg-white border border-[#d0d0d0] p-4 space-y-3">
             <WFSection text="Propriété" />
@@ -906,7 +915,7 @@ const ScreenClientBooking = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenClientPayments = ({ mobile }: { mobile: boolean }) => (
+const ScreenClientPayments = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Client" items={clientNav} active={2} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -936,7 +945,7 @@ const ScreenClientPayments = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenClientSettings = ({ mobile }: { mobile: boolean }) => (
+const ScreenClientSettings = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Client" items={clientNav} active={3} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -975,7 +984,7 @@ const ScreenClientSettings = ({ mobile }: { mobile: boolean }) => (
 
 const ownerNav = ["Dashboard","Réservations","Versements"];
 
-const ScreenOwnerDashboard = ({ mobile }: { mobile: boolean }) => (
+const ScreenOwnerDashboard = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Propriétaire" items={ownerNav} active={0} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -1014,7 +1023,7 @@ const ScreenOwnerDashboard = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenOwnerBookings = ({ mobile }: { mobile: boolean }) => (
+const ScreenOwnerBookings = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Propriétaire" items={ownerNav} active={1} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -1046,7 +1055,7 @@ const ScreenOwnerBookings = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenOwnerPayouts = ({ mobile }: { mobile: boolean }) => (
+const ScreenOwnerPayouts = () => (
   <div className={`flex min-h-screen ${mobile ? "flex-col" : ""}`}>
     {!mobile && <PortalSidebar title="Portail Propriétaire" items={ownerNav} active={2} />}
     {mobile && <div className="bg-white border-b border-[#d0d0d0] px-3 py-2 flex justify-between"><WFBox label="LOGO" h="h-7" className="w-16" /><WFBox label="≡" h="h-7" className="w-7" /></div>}
@@ -1089,7 +1098,7 @@ const ScreenOwnerPayouts = ({ mobile }: { mobile: boolean }) => (
 // ADMIN SCREENS
 // ─────────────────────────────────────────────────────────
 
-const ScreenAdminLogin = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminLogin = () => (
   <div className="bg-[#f0f0f0] min-h-screen flex items-center justify-center">
     <div className="bg-white border border-[#d0d0d0] p-7 w-72 space-y-4">
       <WFBox label="LOGO" h="h-9" className="w-24 mx-auto" />
@@ -1104,7 +1113,7 @@ const ScreenAdminLogin = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminListings = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminListings = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={1} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
@@ -1139,7 +1148,7 @@ const ScreenAdminListings = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminListingEdit = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminListingEdit = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={1} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3 overflow-auto">
@@ -1219,7 +1228,7 @@ const ScreenAdminListingEdit = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminBookings = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminBookings = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={2} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
@@ -1259,7 +1268,7 @@ const ScreenAdminBookings = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminPayments = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminPayments = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={3} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
@@ -1299,7 +1308,7 @@ const ScreenAdminPayments = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminClients = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminClients = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={4} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
@@ -1331,7 +1340,7 @@ const ScreenAdminClients = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminOwners = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminOwners = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={5} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3">
@@ -1365,7 +1374,7 @@ const ScreenAdminOwners = ({ mobile }: { mobile: boolean }) => (
   </div>
 );
 
-const ScreenAdminSettings = ({ mobile }: { mobile: boolean }) => (
+const ScreenAdminSettings = () => (
   <div className="flex min-h-screen">
     <AdminSidebar active={6} />
     <div className="flex-1 bg-[#f7f7f7] p-5 space-y-3 overflow-auto">
@@ -1427,7 +1436,7 @@ const ScreenAdminSettings = ({ mobile }: { mobile: boolean }) => (
 // SCREEN REGISTRY
 // ─────────────────────────────────────────────────────────
 
-const SCREENS: Record<string, React.FC<{ mobile: boolean }>> = {
+const SCREENS: Record<string, React.FC> = {
   home: ScreenHome,
   search: ScreenSearch,
   property: ScreenProperty,
@@ -1478,25 +1487,9 @@ export default function App() {
         <div className="w-56 flex-shrink-0 bg-[#111] border-r border-[#222] flex flex-col overflow-hidden">
           {/* Header */}
           <div className="px-3 py-3 border-b border-[#222]">
-            <div className="text-[8px] font-['JetBrains_Mono'] text-[#444] uppercase tracking-[0.25em] mb-1">WIREFRAMES</div>
+            <div className="text-[8px] font-['JetBrains_Mono'] text-[#444] uppercase tracking-[0.25em] mb-1">PROTOTYPE</div>
             <div className="text-[10px] text-[#666] font-['Outfit']">Location courte durée</div>
-            <div className="text-[8px] font-['JetBrains_Mono'] text-[#333] mt-0.5">{totalScreens} écrans · 4 modules</div>
-          </div>
-
-          {/* Viewport toggle */}
-          <div className="px-3 py-2 border-b border-[#1e1e1e] flex gap-1">
-            <button
-              onClick={() => setMobile(false)}
-              className={`flex-1 h-6 text-[9px] font-['JetBrains_Mono'] uppercase tracking-wider border ${!mobile ? "bg-[#333] text-white border-[#444]" : "bg-transparent text-[#444] border-[#222]"}`}
-            >
-              Desktop
-            </button>
-            <button
-              onClick={() => setMobile(true)}
-              className={`flex-1 h-6 text-[9px] font-['JetBrains_Mono'] uppercase tracking-wider border ${mobile ? "bg-[#333] text-white border-[#444]" : "bg-transparent text-[#444] border-[#222]"}`}
-            >
-              Mobile
-            </button>
+            <div className="text-[8px] font-['JetBrains_Mono'] text-[#333] mt-0.5">{totalScreens} écrans</div>
           </div>
 
           {/* Module tabs */}
@@ -1591,30 +1584,9 @@ export default function App() {
           </div>
         </div>
 
-        {/* Wireframe canvas */}
-        <div className="flex-1 overflow-auto bg-[#161616]">
-          {mobile ? (
-            <div className="flex items-start justify-center py-8">
-              <div className="flex flex-col" style={{ width: 375 }}>
-                {/* Phone frame */}
-                <div className="border border-[#333] bg-white overflow-hidden shadow-2xl" style={{ width: 375, minHeight: 667 }}>
-                  <ScreenComp mobile={true} />
-                </div>
-                <div className="mt-2 text-center">
-                  <span className="text-[8px] font-['JetBrains_Mono'] text-[#333]">375 × 667 · iOS SE</span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="p-4" style={{ minWidth: 1200 }}>
-              <div className="bg-white overflow-hidden border border-[#2a2a2a] shadow-2xl" style={{ minHeight: 768 }}>
-                <ScreenComp mobile={false} />
-              </div>
-              <div className="mt-2 pl-1">
-                <span className="text-[8px] font-['JetBrains_Mono'] text-[#333]">Desktop · 1280px</span>
-              </div>
-            </div>
-          )}
+        {/* Web App Canvas */}
+        <div className="flex-1 overflow-auto bg-white relative">
+          <ScreenComp />
         </div>
       </div>
     </div>
