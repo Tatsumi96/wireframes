@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
         </Link>
 
         {/* Desktop nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }} className="hidden md:flex">
+        <nav className="nav-desktop">
           {navLinks.map(link => (
             <Link
               key={link.to}
@@ -41,12 +41,14 @@ export const Header: React.FC = () => {
           <div style={{ width: '1px', height: '20px', background: 'var(--color-border)' }} />
           <Link
             to="/login"
+            className="btn-anim"
             style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-taupe)', border: '1px solid var(--color-border)', padding: '8px 18px' }}
           >
             Connexion
           </Link>
           <Link
             to="/register"
+            className="btn-anim"
             style={{ fontFamily: 'var(--font-body)', fontSize: '14px', background: 'var(--color-anthracite)', color: '#fff', padding: '8px 18px' }}
           >
             S'inscrire
@@ -56,8 +58,7 @@ export const Header: React.FC = () => {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-anthracite)' }}
-          className="flex md:hidden"
+          className="nav-mobile-btn"
           aria-label="Menu"
         >
           <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">

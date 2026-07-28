@@ -32,15 +32,15 @@ const PropertyCard: React.FC<{ property: typeof PROPERTY_IMAGES[0] }> = ({ prope
 
 // Hero search bar
 const SearchBar: React.FC = () => (
-  <div style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '4px', display: 'flex', alignItems: 'stretch', flexWrap: 'wrap', boxShadow: 'var(--shadow-md)' }}>
+  <div className="hero-search-bar">
     {[['Destination', 'Ville, région…'], ['Arrivée', 'jj / mm / aaaa'], ['Départ', 'jj / mm / aaaa']].map(([label, ph]) => (
-      <div key={label} style={{ flex: 1, minWidth: '140px', padding: '12px 16px', borderRight: '1px solid var(--color-border)' }}>
+      <div key={label} className="search-field-item">
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', letterSpacing: '0.04em', marginBottom: '4px' }}>{label}</p>
         <input placeholder={ph} style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-anthracite)', width: '100%' }} />
       </div>
     ))}
-    <div style={{ padding: '8px' }}>
-      <Link to="/search" className="btn-anim" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-anthracite)', color: '#fff', padding: '12px 24px', fontFamily: 'var(--font-body)', fontSize: '14px', height: '100%', textDecoration: 'none' }}>
+    <div className="search-btn-wrapper">
+      <Link to="/search" className="search-submit-btn btn-anim">
         Rechercher
       </Link>
     </div>
@@ -51,7 +51,7 @@ export default function HomePage() {
   return (
     <div className="fade-in">
       {/* Hero */}
-      <section style={{ position: 'relative', height: '580px', overflow: 'hidden' }}>
+      <section className="hero-section" style={{ overflow: 'hidden' }}>
         <ImgPlaceholder
           src={HERO_HOME_IMAGE}
           alt="Propriété de luxe avec piscine et vue panoramique"
@@ -60,8 +60,8 @@ export default function HomePage() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(33,31,28,0.25), rgba(33,31,28,0.65))' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', paddingBottom: '60px' }}>
           <div className="fade-in-up">
-            <h1 style={{ color: '#fff', marginBottom: '8px', maxWidth: '560px', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>Vos séjours d'exception</h1>
-            <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: '18px', marginBottom: '32px', maxWidth: '440px' }}>Des propriétés soigneusement sélectionnées pour des expériences mémorables.</p>
+            <h1 className="hero-title" style={{ color: '#fff', marginBottom: '8px', maxWidth: '560px', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>Vos séjours d'exception</h1>
+            <p className="hero-subtitle" style={{ color: 'rgba(255,255,255,0.92)', fontSize: '18px', marginBottom: '32px', maxWidth: '440px' }}>Des propriétés soigneusement sélectionnées pour des expériences mémorables.</p>
             <SearchBar />
           </div>
         </div>
