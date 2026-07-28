@@ -15,7 +15,7 @@ export function ContactPage() {
           <Field label="Email" placeholder="jean@exemple.fr" type="email" />
           <Field label="Sujet" placeholder="Votre demande en quelques mots" />
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
+            <label style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Message</label>
             <textarea rows={5} placeholder="Décrivez votre demande…" style={{ padding: '12px 14px', fontFamily: 'var(--font-body)', fontSize: '15px', border: '1px solid var(--color-border)', background: 'var(--color-ivory)', color: 'var(--color-anthracite)', outline: 'none', resize: 'vertical' }} />
           </div>
           <button style={{ background: 'var(--color-anthracite)', color: '#fff', padding: '14px', fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 500, border: 'none', cursor: 'pointer' }}>

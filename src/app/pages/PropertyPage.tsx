@@ -81,13 +81,13 @@ export default function PropertyPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid var(--color-border)' }}>
                   {[['ARRIVÉE', 'jj/mm/aaaa'], ['DÉPART', 'jj/mm/aaaa']].map(([l, p]) => (
                     <div key={l} style={{ padding: '12px 14px', borderRight: l === 'ARRIVÉE' ? '1px solid var(--color-border)' : 'none' }}>
-                      <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>{l}</p>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', marginBottom: '4px' }}>{l}</p>
                       <input placeholder={p} style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', width: '100%', color: 'var(--color-anthracite)' }} />
                     </div>
                   ))}
                 </div>
                 <div style={{ padding: '12px 14px' }}>
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>VOYAGEURS</p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', marginBottom: '4px' }}>Voyageurs</p>
                   <input placeholder="X adultes" style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', width: '100%', color: 'var(--color-anthracite)' }} />
                 </div>
               </div>

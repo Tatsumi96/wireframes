@@ -13,7 +13,7 @@ const clientLinks = [
 
 const StatCard: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div style={{ border: '1px solid var(--color-border)', padding: '20px 24px', background: 'var(--color-ivory)' }}>
-    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>{label}</p>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>{label}</p>
     <p style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 600, color: 'var(--color-anthracite)' }}>{value}</p>
   </div>
 );
@@ -119,7 +119,7 @@ export function ClientPayments() {
           {/* Header */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 120px 100px', gap: '16px', padding: '12px 20px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-beige)' }}>
             {['Propriété', 'Date', 'Montant', 'Statut'].map(h => (
-              <p key={h} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{h}</p>
+              <p key={h} style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{h}</p>
             ))}
           </div>
           {[1, 2, 3, 4, 5].map(i => (

@@ -25,9 +25,9 @@ const PropertyCard: React.FC<{ to?: string }> = ({ to = '/property' }) => (
 // Hero search bar
 const SearchBar: React.FC = () => (
   <div style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '4px', display: 'flex', alignItems: 'stretch', flexWrap: 'wrap' }}>
-    {[['DESTINATION', 'Ville, région…'], ['ARRIVÉE', 'jj/mm/aaaa'], ['DÉPART', 'jj/mm/aaaa']].map(([label, ph]) => (
+    {[['Destination', 'Ville, région…'], ['Arrivée', 'jj / mm / aaaa'], ['Départ', 'jj / mm / aaaa']].map(([label, ph]) => (
       <div key={label} style={{ flex: 1, minWidth: '140px', padding: '12px 16px', borderRight: '1px solid var(--color-border)' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>{label}</p>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', letterSpacing: '0.04em', marginBottom: '4px' }}>{label}</p>
         <input placeholder={ph} style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-anthracite)', width: '100%' }} />
       </div>
     ))}

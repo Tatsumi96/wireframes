@@ -49,7 +49,7 @@ export default function SearchPage() {
       {/* Filters row */}
       <div style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-ivory)' }}>
         <div className="container" style={{ paddingTop: '12px', paddingBottom: '12px', display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Filtres :</span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Filtres :</span>
           {['Prix', 'Type de bien', 'Chambres', 'Équipements', 'Disponibilité'].map(f => <FilterTag key={f} label={f} />)}
           <button style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-terracotta)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline', marginLeft: '8px' }}>
             Réinitialiser

@@ -17,7 +17,7 @@ export function BookingStep1() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '28px' }}>
             {['Adultes', 'Enfants'].map(l => (
               <div key={l}>
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>{l}</p>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>{l}</p>
                 <div style={{ border: '1px solid var(--color-border)', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px' }}>
                   <button style={{ background: 'none', border: 'none', color: 'var(--color-taupe)', cursor: 'pointer', fontSize: '16px' }}>−</button>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '14px' }}>2</span>

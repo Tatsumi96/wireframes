@@ -107,7 +107,7 @@ export const Footer: React.FC = () => (
           { title: 'Support', items: ['Contact', 'FAQ', 'Aide'] },
         ].map(col => (
           <div key={col.title}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>{col.title}</p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px' }}>{col.title}</p>
             {col.items.map(item => (
               <a key={item} href="#" style={{ display: 'block', fontSize: '14px', color: 'var(--color-taupe)', marginBottom: '8px', transition: 'color 0.2s' }}>{item}</a>
             ))}
@@ -128,7 +128,7 @@ export const PortalSidebar: React.FC<{ title: string; links: { label: string; to
   return (
     <aside style={{ width: '220px', flexShrink: 0, borderRight: '1px solid var(--color-border)', background: 'var(--color-beige)', minHeight: 'calc(100vh - 72px)', padding: '32px 0' }}>
       <div style={{ padding: '0 24px 24px', borderBottom: '1px solid var(--color-border)', marginBottom: '16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{title}</p>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{title}</p>
       </div>
       <nav style={{ padding: '0 12px' }}>
         {links.map(link => (
@@ -210,7 +210,7 @@ export const Btn: React.FC<{
 
 export const Field: React.FC<{ label?: string; placeholder: string; type?: string }> = ({ label, placeholder, type = 'text' }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-    {label && <label style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</label>}
+    {label && <label style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: 'var(--color-taupe)' }}>{label}</label>}
     <input
       type={type}
       placeholder={placeholder}
@@ -234,7 +234,7 @@ export const ImgPlaceholder: React.FC<{ label?: string; style?: React.CSSPropert
 );
 
 export const SectionLabel: React.FC<{ text: string }> = ({ text }) => (
-  <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '16px' }}>{text}</p>
+  <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>{text}</p>
 );
 
 export const Divider: React.FC = () => (
