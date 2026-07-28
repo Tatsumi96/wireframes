@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Btn, Field, ImgPlaceholder, Pill, SectionLabel, Divider } from '../components/Layout';
+import { ImgPlaceholder, Pill, SectionLabel, Divider } from '../components/Layout';
 import { PROPERTY_IMAGES, MAP_PREVIEW_IMAGE, CALENDAR_PREVIEW_IMAGE, REVIEWER_AVATARS } from '../data/images';
 
 const property = PROPERTY_IMAGES[0];
@@ -46,10 +46,10 @@ const ReviewCard: React.FC<{ review: typeof reviewsData[0] }> = ({ review }) => 
 
 export default function PropertyPage() {
   return (
-    <div>
-      {/* Gallery grid with high-quality renderings */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '4px', height: '480px', maxHeight: '55vh', overflow: 'hidden', background: 'var(--color-anthracite)' }}>
-        <ImgPlaceholder src={property.gallery![0]} alt="Bastide provençale façade et terrasse" style={{ gridRow: 'span 2', height: '100%', border: 'none', objectFit: 'cover' }} />
+    <div className="fade-in" style={{ position: 'relative' }}>
+      {/* Gallery grid with responsive container */}
+      <div className="property-gallery-grid">
+        <ImgPlaceholder src={property.gallery![0]} alt="Bastide provençale façade et terrasse" style={{ height: '100%', border: 'none', objectFit: 'cover' }} />
         <ImgPlaceholder src={property.gallery![1]} alt="Salon d'architecte spacieux" style={{ height: '100%', border: 'none', objectFit: 'cover' }} />
         <ImgPlaceholder src={property.gallery![2]} alt="Cuisine équipée contemporaine" style={{ height: '100%', border: 'none', objectFit: 'cover' }} />
         <ImgPlaceholder src={property.gallery![3]} alt="Chambre principale lumineuse" style={{ height: '100%', border: 'none', objectFit: 'cover' }} />
@@ -65,12 +65,12 @@ export default function PropertyPage() {
         </div>
       </div>
 
-      <div className="container" style={{ paddingTop: '48px', paddingBottom: '80px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '60px', alignItems: 'start' }}>
+      <div className="container" style={{ paddingTop: '48px', paddingBottom: '100px' }}>
+        <div className="property-main-layout">
 
           {/* Left: details */}
-          <div>
-            <h1 style={{ fontSize: '36px', marginBottom: '12px' }}>{property.title}</h1>
+          <div className="fade-in-up">
+            <h1 className="property-title" style={{ fontSize: '36px', marginBottom: '12px' }}>{property.title}</h1>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px' }}>
               {['Luberon', 'Villa', '8 pers.', '4 chambres', '★ 4.9 (48 avis)'].map(t => <Pill key={t} label={t} />)}
             </div>
@@ -87,10 +87,10 @@ export default function PropertyPage() {
             </div>
 
             <SectionLabel text="Équipements" />
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '12px', marginBottom: '28px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px', marginBottom: '28px' }}>
               {['Piscine chauffée', 'Jardin paysager', 'Wifi haut débit', 'Cuisine équipée', 'Parking privé', 'Climatisation', 'Lave-linge', 'Barbecue'].map(e => (
                 <div key={e} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--color-taupe)' }}>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-terracotta)' }} />
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-terracotta)', flexShrink: 0 }} />
                   {e}
                 </div>
               ))}
@@ -112,7 +112,7 @@ export default function PropertyPage() {
             <SectionLabel text="Localisation" />
             <div style={{ height: '240px', overflow: 'hidden', border: '1px solid var(--color-border)', marginBottom: '28px', position: 'relative' }}>
               <ImgPlaceholder src={MAP_PREVIEW_IMAGE} alt="Localisation géographique de la bastide" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', bottom: '16px', left: '16px', background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '8px 14px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-anthracite)' }}>
+              <div style={{ position: 'absolute', bottom: '16px', left: '16px', right: '16px', background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '8px 14px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-anthracite)' }}>
                 📍 Luberon · Adresse exacte transmise après réservation
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function PropertyPage() {
           </div>
 
           {/* Right: booking widget */}
-          <div style={{ position: 'sticky', top: '88px', border: '1px solid var(--color-border)', background: 'var(--color-ivory)' }}>
+          <div className="property-booking-widget fade-in-up delay-2">
             <div style={{ padding: '24px' }}>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: '24px', fontWeight: 600, color: 'var(--color-terracotta)', marginBottom: '4px' }}>350 €<span style={{ fontSize: '14px', color: 'var(--color-taupe)', fontWeight: 400 }}> / nuit</span></p>
               <Divider />
@@ -141,7 +141,7 @@ export default function PropertyPage() {
                   <input defaultValue="4 adultes" style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', width: '100%', color: 'var(--color-anthracite)' }} />
                 </div>
               </div>
-              <Link to="/booking/1" style={{ display: 'block', background: 'var(--color-anthracite)', color: '#fff', textAlign: 'center', padding: '14px', fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 500, marginBottom: '16px', textDecoration: 'none' }}>
+              <Link to="/booking/1" className="btn-anim" style={{ display: 'block', background: 'var(--color-anthracite)', color: '#fff', textAlign: 'center', padding: '14px', fontFamily: 'var(--font-body)', fontSize: '15px', fontWeight: 500, marginBottom: '16px', textDecoration: 'none' }}>
                 Réserver maintenant →
               </Link>
               <Divider />
@@ -160,6 +160,17 @@ export default function PropertyPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Mobile Bottom Booking Bar */}
+      <div className="mobile-bottom-booking-bar">
+        <div>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', fontWeight: 600, color: 'var(--color-terracotta)' }}>350 € <span style={{ fontSize: '12px', color: 'var(--color-taupe)', fontWeight: 400 }}>/ nuit</span></p>
+          <p style={{ fontSize: '12px', color: 'var(--color-taupe)' }}>★ 4.9 · 14-21 Août</p>
+        </div>
+        <Link to="/booking/1" className="btn-anim" style={{ background: 'var(--color-anthracite)', color: '#fff', padding: '12px 20px', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}>
+          Réserver →
+        </Link>
       </div>
     </div>
   );

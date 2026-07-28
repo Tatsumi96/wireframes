@@ -327,7 +327,39 @@ a {
   white-space: nowrap;
 }
 
-@media (max-width: 860px) {
+/* ─── Property Details Page Responsive Styles ──────────────────────────── */
+
+.property-gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  height: 480px;
+  max-height: 55vh;
+  overflow: hidden;
+  background: var(--color-anthracite);
+}
+
+.property-main-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 60px;
+  align-items: start;
+}
+
+.property-booking-widget {
+  position: sticky;
+  top: 88px;
+  border: 1px solid var(--color-border);
+  background: var(--color-ivory);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-bottom-booking-bar {
+  display: none;
+}
+
+@media (max-width: 990px) {
   .container { padding: 0 20px; }
   h1 { font-size: 34px; }
   h2 { font-size: 24px; }
@@ -378,5 +410,64 @@ a {
   .search-submit-btn {
     padding: 14px;
     width: 100%;
+  }
+
+  /* Property Page Responsive Layout */
+  .property-main-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .property-booking-widget {
+    position: static;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .property-gallery-grid {
+    height: 380px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .property-gallery-grid > img:first-child {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .property-gallery-grid {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: none;
+  }
+
+  .property-gallery-grid img,
+  .property-gallery-grid > div {
+    height: 260px !important;
+    width: 100% !important;
+  }
+
+  .property-gallery-grid > img:not(:first-child) {
+    display: none;
+  }
+
+  .property-title {
+    font-size: 26px !important;
+  }
+
+  .mobile-bottom-booking-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-ivory);
+    border-top: 1px solid var(--color-border);
+    padding: 12px 20px;
+    z-index: 60;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
   }
 }
