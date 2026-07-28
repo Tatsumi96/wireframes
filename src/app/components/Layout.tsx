@@ -176,13 +176,14 @@ export const StepBar: React.FC<{ steps: string[]; current: number }> = ({ steps,
 // ─── Shared UI atoms ─────────────────────────────────────────────────────────
 
 export const Pill: React.FC<{ label: string; accent?: boolean }> = ({ label, accent }) => (
-  <span style={{
+  <span className="pill-anim" style={{
     display: 'inline-flex', alignItems: 'center',
     padding: '4px 10px',
     fontFamily: 'var(--font-mono)', fontSize: '12px',
     border: '1px solid ' + (accent ? 'var(--color-terracotta)' : 'var(--color-border)'),
     color: accent ? 'var(--color-terracotta)' : 'var(--color-taupe)',
     background: 'transparent',
+    cursor: 'pointer',
   }}>{label}</span>
 );
 
@@ -200,12 +201,11 @@ export const Btn: React.FC<{
     cursor: 'pointer',
     border: 'none',
     width: fullWidth ? '100%' : undefined,
-    transition: 'opacity 0.2s',
     ...(variant === 'primary' && { background: 'var(--color-anthracite)', color: '#fff' }),
     ...(variant === 'secondary' && { background: 'transparent', border: '1px solid var(--color-anthracite)', color: 'var(--color-anthracite)' }),
     ...(variant === 'ghost' && { background: 'transparent', color: 'var(--color-terracotta)', padding: '12px 0', textDecoration: 'underline' }),
   };
-  return <button type={type} style={styles} onClick={onClick}>{label}</button>;
+  return <button type={type} className="btn-anim" style={styles} onClick={onClick}>{label}</button>;
 };
 
 export const Field: React.FC<{ label?: string; placeholder: string; type?: string }> = ({ label, placeholder, type = 'text' }) => (
@@ -227,11 +227,27 @@ export const Field: React.FC<{ label?: string; placeholder: string; type?: strin
   </div>
 );
 
-export const ImgPlaceholder: React.FC<{ label?: string; style?: React.CSSProperties }> = ({ label = '[ IMAGE ]', style }) => (
-  <div style={{ background: 'var(--color-beige)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', ...style }}>
-    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-border)' }}>{label}</span>
-  </div>
-);
+export const ImgPlaceholder: React.FC<{ label?: string; style?: React.CSSProperties; src?: string; alt?: string; className?: string }> = ({ label = '[ IMAGE ]', style, src, alt, className }) => {
+  const [error, setError] = React.useState(false);
+
+  if (src && !error) {
+    return (
+      <img
+        src={src}
+        alt={alt || label.replace(/^\[\s*|\s*\]$/g, '')}
+        className={className}
+        style={{ objectFit: 'cover', width: '100%', height: '100%', display: 'block', ...style }}
+        onError={() => setError(true)}
+      />
+    );
+  }
+
+  return (
+    <div style={{ background: 'var(--color-beige)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', minHeight: '80px', ...style }} className={className}>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-taupe)', padding: '8px', textAlign: 'center' }}>{label}</span>
+    </div>
+  );
+};
 
 export const SectionLabel: React.FC<{ text: string }> = ({ text }) => (
   <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: 'var(--color-taupe)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>{text}</p>

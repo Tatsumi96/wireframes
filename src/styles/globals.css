@@ -16,6 +16,11 @@
 
   /* Spacing */
   --container: 1200px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(33, 31, 28, 0.04);
+  --shadow-md: 0 10px 24px -4px rgba(33, 31, 28, 0.08);
+  --shadow-lg: 0 18px 36px -6px rgba(33, 31, 28, 0.14);
 }
 
 * {
@@ -79,8 +84,182 @@ a {
   padding: 0 40px;
 }
 
+/* ─── Equal Height Cards & Modern Animations ───────────────────────────────── */
+
+/* Equal height grid container */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  align-items: stretch; /* Enforces equal height for all grid items */
+}
+
+/* Base card component with equal height */
+.equal-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-ivory);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease;
+}
+
+/* Hover effect on card */
+.equal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-anthracite);
+}
+
+/* Image container inside equal card */
+.card-img-wrapper {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background: var(--color-beige);
+}
+
+/* Zoom effect on card image */
+.card-img-wrapper img,
+.card-img-wrapper .img-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.equal-card:hover .card-img-wrapper img {
+  transform: scale(1.07);
+}
+
+/* Body content inside equal card */
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.card-content-top {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-anthracite);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: var(--color-taupe);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(201, 194, 180, 0.4);
+}
+
+/* Line clamping utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keyframes for entrance animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Stagger animation delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Interactive element animation classes */
+.btn-anim {
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+.btn-anim:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(33, 31, 28, 0.18);
+}
+
+.btn-anim:active {
+  transform: translateY(0);
+}
+
+.pill-anim {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pill-anim:hover {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+  background: rgba(140, 74, 50, 0.06);
+  transform: translateY(-1px);
+}
+
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
   h1 { font-size: 36px; }
   h2 { font-size: 24px; }
+  .card-grid { grid-template-columns: 1fr; }
 }

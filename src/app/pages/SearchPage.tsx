@@ -1,30 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Btn, Field, ImgPlaceholder, Pill, SectionLabel, Divider, Card } from '../components/Layout';
+import { Btn, Field, ImgPlaceholder, Pill } from '../components/Layout';
+import { PROPERTY_IMAGES, MAP_PREVIEW_IMAGE } from '../data/images';
 
 const FilterTag: React.FC<{ label: string }> = ({ label }) => (
-  <button style={{ padding: '7px 14px', fontFamily: 'var(--font-body)', fontSize: '13px', border: '1px solid var(--color-border)', color: 'var(--color-taupe)', background: 'none', cursor: 'pointer' }}>
+  <button className="pill-anim" style={{ padding: '7px 14px', fontFamily: 'var(--font-body)', fontSize: '13px', border: '1px solid var(--color-border)', color: 'var(--color-taupe)', background: 'none', cursor: 'pointer' }}>
     {label} ▾
   </button>
 );
 
-const ResultCard: React.FC = () => (
-  <Link to="/property" style={{ display: 'flex', gap: '16px', background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '0', textDecoration: 'none', overflow: 'hidden' }}>
-    <ImgPlaceholder style={{ width: '180px', flexShrink: 0, height: '140px' }} />
-    <div style={{ flex: 1, padding: '16px 16px 16px 0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: 600, color: 'var(--color-anthracite)' }}>Bastide provençale</h3>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-terracotta)' }}>★ 4.8</span>
-        </div>
-        <p style={{ fontSize: '13px', color: 'var(--color-taupe)', marginBottom: '8px' }}>Luberon · Villa · 8 pers. · 4 chambres</p>
-        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          {['Piscine', 'Jardin', 'Wifi'].map(a => <Pill key={a} label={a} />)}
-        </div>
+const ResultCard: React.FC<{ property: typeof PROPERTY_IMAGES[0] }> = ({ property }) => (
+  <Link to="/property" style={{ display: 'block', textDecoration: 'none' }}>
+    <div className="equal-card" style={{ flexDirection: 'row', minHeight: '150px' }}>
+      <div className="card-img-wrapper" style={{ width: '220px', height: '100%', minHeight: '150px' }}>
+        <ImgPlaceholder src={property.src} alt={property.title} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '15px', color: 'var(--color-terracotta)' }}>350 € <span style={{ fontSize: '12px', color: 'var(--color-border)' }}>/ nuit</span></span>
-        <span style={{ fontSize: '13px', color: 'var(--color-taupe)', textDecoration: 'underline' }}>Voir →</span>
+      <div className="card-body" style={{ padding: '16px 20px' }}>
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
+            <h3 className="card-title" style={{ fontSize: '16px' }}>{property.title}</h3>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-terracotta)', fontWeight: 600, marginLeft: '8px' }}>★ {property.rating}</span>
+          </div>
+          <p className="card-subtitle" style={{ marginBottom: '10px' }}>{property.location} · {property.specs}</p>
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+            {['Piscine', 'Jardin', 'Wifi'].map(a => <Pill key={a} label={a} />)}
+          </div>
+        </div>
+        <div className="card-footer" style={{ marginTop: '12px', paddingTop: '10px' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '15px', color: 'var(--color-terracotta)', fontWeight: 600 }}>{property.price} <span style={{ fontSize: '12px', color: 'var(--color-taupe)', fontWeight: 400 }}>/ nuit</span></span>
+          <span style={{ fontSize: '13px', color: 'var(--color-taupe)', textDecoration: 'underline' }}>Voir →</span>
+        </div>
       </div>
     </div>
   </Link>
@@ -32,7 +37,7 @@ const ResultCard: React.FC = () => (
 
 export default function SearchPage() {
   return (
-    <div>
+    <div className="fade-in">
       {/* Search bar */}
       <div style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-beige)', padding: '16px 0' }}>
         <div className="container" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -59,21 +64,27 @@ export default function SearchPage() {
 
       {/* Results + map */}
       <div className="container" style={{ paddingTop: '32px', paddingBottom: '60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr min(480px, 40%)', gap: '32px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr min(480px, 42%)', gap: '32px', alignItems: 'start' }}>
           {/* Results */}
           <div>
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-taupe)', marginBottom: '20px' }}>24 propriétés trouvées</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[1, 2, 3, 4, 5].map(i => <ResultCard key={i} />)}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {PROPERTY_IMAGES.map((prop, i) => (
+                <div key={prop.id} className={`fade-in-up delay-${(i % 4) + 1}`}>
+                  <ResultCard property={prop} />
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Map sticky */}
-          <div style={{ position: 'sticky', top: '88px' }}>
-            <ImgPlaceholder
-              label="[ CARTE INTERACTIVE — OpenStreetMap ]"
-              style={{ height: '560px' }}
-            />
+          <div style={{ position: 'sticky', top: '88px', border: '1px solid var(--color-border)', overflow: 'hidden', height: '620px' }} className="equal-card">
+            <div className="card-img-wrapper" style={{ height: '100%' }}>
+              <ImgPlaceholder
+                src={MAP_PREVIEW_IMAGE}
+                alt="Carte interactive OpenStreetMap des propriétés"
+              />
+            </div>
           </div>
         </div>
       </div>

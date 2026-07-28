@@ -1,20 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Btn, Field, ImgPlaceholder, Pill, SectionLabel, Divider } from '../components/Layout';
+import { Btn, ImgPlaceholder, Pill, SectionLabel, Divider } from '../components/Layout';
+import { PROPERTY_IMAGES, HERO_HOME_IMAGE, HOST_OWNER_IMAGE } from '../data/images';
 
-// Property card used in home + search
-const PropertyCard: React.FC<{ to?: string }> = ({ to = '/property' }) => (
-  <Link to={to} style={{ display: 'block', textDecoration: 'none' }}>
-    <div style={{ overflow: 'hidden', background: 'var(--color-ivory)', border: '1px solid var(--color-border)', transition: 'border-color 0.2s' }}>
-      <ImgPlaceholder style={{ height: '220px' }} />
-      <div style={{ padding: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-          <h3 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--color-anthracite)' }}>Maison de caractère</h3>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-terracotta)' }}>★ 4.9</span>
+// Property card with strict equal height & smooth modern hover/zoom animations
+const PropertyCard: React.FC<{ property: typeof PROPERTY_IMAGES[0] }> = ({ property }) => (
+  <Link to="/property" style={{ display: 'block', textDecoration: 'none', height: '100%' }}>
+    <div className="equal-card">
+      <div className="card-img-wrapper">
+        <ImgPlaceholder
+          src={property.src}
+          alt={property.title}
+        />
+      </div>
+      <div className="card-body">
+        <div className="card-content-top">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <h3 className="card-title">{property.title}</h3>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--color-terracotta)', flexShrink: 0, marginLeft: '8px', fontWeight: 600 }}>★ {property.rating}</span>
+          </div>
+          <p className="card-subtitle">{property.location} · {property.specs}</p>
         </div>
-        <p style={{ fontSize: '14px', color: 'var(--color-taupe)', marginBottom: '12px' }}>Luberon · Villa · 6 pers.</p>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--color-terracotta)' }}>280 € <span style={{ color: 'var(--color-border)' }}>/ nuit</span></span>
+        <div className="card-footer">
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--color-terracotta)', fontWeight: 600 }}>{property.price} <span style={{ color: 'var(--color-taupe)', fontWeight: 400, fontSize: '12px' }}>/ nuit</span></span>
           <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--color-taupe)', textDecoration: 'underline' }}>Voir →</span>
         </div>
       </div>
@@ -24,7 +32,7 @@ const PropertyCard: React.FC<{ to?: string }> = ({ to = '/property' }) => (
 
 // Hero search bar
 const SearchBar: React.FC = () => (
-  <div style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '4px', display: 'flex', alignItems: 'stretch', flexWrap: 'wrap' }}>
+  <div style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-border)', padding: '4px', display: 'flex', alignItems: 'stretch', flexWrap: 'wrap', boxShadow: 'var(--shadow-md)' }}>
     {[['Destination', 'Ville, région…'], ['Arrivée', 'jj / mm / aaaa'], ['Départ', 'jj / mm / aaaa']].map(([label, ph]) => (
       <div key={label} style={{ flex: 1, minWidth: '140px', padding: '12px 16px', borderRight: '1px solid var(--color-border)' }}>
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', letterSpacing: '0.04em', marginBottom: '4px' }}>{label}</p>
@@ -32,7 +40,7 @@ const SearchBar: React.FC = () => (
       </div>
     ))}
     <div style={{ padding: '8px' }}>
-      <Link to="/search" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-anthracite)', color: '#fff', padding: '12px 24px', fontFamily: 'var(--font-body)', fontSize: '14px', height: '100%' }}>
+      <Link to="/search" className="btn-anim" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-anthracite)', color: '#fff', padding: '12px 24px', fontFamily: 'var(--font-body)', fontSize: '14px', height: '100%', textDecoration: 'none' }}>
         Rechercher
       </Link>
     </div>
@@ -41,15 +49,21 @@ const SearchBar: React.FC = () => (
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="fade-in">
       {/* Hero */}
       <section style={{ position: 'relative', height: '580px', overflow: 'hidden' }}>
-        <ImgPlaceholder label="[ HERO — Photo grande propriété ]" style={{ position: 'absolute', inset: 0, height: '100%', width: '100%', border: 'none' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(33,31,28,0.28)' }} />
+        <ImgPlaceholder
+          src={HERO_HOME_IMAGE}
+          alt="Propriété de luxe avec piscine et vue panoramique"
+          style={{ position: 'absolute', inset: 0, height: '100%', width: '100%', border: 'none', objectFit: 'cover' }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(33,31,28,0.25), rgba(33,31,28,0.65))' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', paddingBottom: '60px' }}>
-          <h1 style={{ color: '#fff', marginBottom: '8px', maxWidth: '560px' }}>Vos séjours d'exception</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '18px', marginBottom: '32px', maxWidth: '440px' }}>Des propriétés soigneusement sélectionnées pour des expériences mémorables.</p>
-          <SearchBar />
+          <div className="fade-in-up">
+            <h1 style={{ color: '#fff', marginBottom: '8px', maxWidth: '560px', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>Vos séjours d'exception</h1>
+            <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: '18px', marginBottom: '32px', maxWidth: '440px' }}>Des propriétés soigneusement sélectionnées pour des expériences mémorables.</p>
+            <SearchBar />
+          </div>
         </div>
       </section>
 
@@ -62,8 +76,12 @@ export default function HomePage() {
           </div>
           <Link to="/search" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-terracotta)', textDecoration: 'underline' }}>Voir tout →</Link>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
-          {[1, 2, 3, 4, 5, 6].map(i => <PropertyCard key={i} />)}
+        <div className="card-grid">
+          {PROPERTY_IMAGES.map((prop, i) => (
+            <div key={prop.id} className={`fade-in-up delay-${(i % 4) + 1}`} style={{ height: '100%' }}>
+              <PropertyCard property={prop} />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -84,13 +102,20 @@ export default function HomePage() {
 
       {/* CTA owner */}
       <section className="container" style={{ paddingBottom: '80px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
-        <div>
+        <div className="fade-in-up">
           <SectionLabel text="Propriétaires" />
           <h2 style={{ marginBottom: '16px' }}>Vous avez un bien à louer ?</h2>
-          <p style={{ marginBottom: '28px', maxWidth: '380px' }}>Rejoignez notre sélection de propriétaires et donnez à votre bien la visibilité qu'il mérite.</p>
+          <p style={{ marginBottom: '28px', maxWidth: '380px', lineHeight: '1.6', color: 'var(--color-taupe)' }}>Rejoignez notre sélection de propriétaires et donnez à votre bien la visibilité d'exception qu'il mérite.</p>
           <Btn label="Déposer une annonce →" />
         </div>
-        <ImgPlaceholder label="[ Photo propriétaire ]" style={{ height: '300px' }} />
+        <div className="equal-card" style={{ height: '320px', width: '100%' }}>
+          <div className="card-img-wrapper" style={{ height: '100%' }}>
+            <ImgPlaceholder
+              src={HOST_OWNER_IMAGE}
+              alt="Propriétaire accueillant devant sa villa"
+            />
+          </div>
+        </div>
       </section>
     </div>
   );
