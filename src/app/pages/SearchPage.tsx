@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Btn, Field, ImgPlaceholder, Pill } from '../components/Layout';
+import { ImgPlaceholder, Pill, DateField, TravelerField } from '../components/Layout';
 import { PROPERTY_IMAGES, MAP_PREVIEW_IMAGE } from '../data/images';
 
 const FilterTag: React.FC<{ label: string }> = ({ label }) => (
@@ -38,16 +38,32 @@ const ResultCard: React.FC<{ property: typeof PROPERTY_IMAGES[0] }> = ({ propert
 export default function SearchPage() {
   return (
     <div className="fade-in">
-      {/* Search bar */}
-      <div style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-beige)', padding: '16px 0' }}>
-        <div className="container" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
-            <Field placeholder="Destination" />
-            <Field placeholder="Arrivée" />
-            <Field placeholder="Départ" />
-            <Field placeholder="Voyageurs" />
+      {/* Search bar — Airbnb style with calendars & traveler picker */}
+      <div style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-beige)', padding: '12px 0' }}>
+        <div className="container">
+          <div className="hero-search-bar" style={{ boxShadow: 'var(--shadow-sm)' }}>
+            <div className="search-field-group">
+              <div className="search-field-item">
+                <span className="search-field-label">Destination</span>
+                <input placeholder="Ville, région…" className="search-field-input" />
+              </div>
+              <div className="search-field-divider" />
+              <DateField label="Arrivée" />
+              <div className="search-field-divider" />
+              <DateField label="Départ" />
+              <div className="search-field-divider" />
+              <TravelerField />
+            </div>
+            <div className="search-btn-wrapper">
+              <Link to="/search" className="search-submit-btn btn-anim">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
+                Rechercher
+              </Link>
+            </div>
           </div>
-          <Btn label="Rechercher" />
         </div>
       </div>
 

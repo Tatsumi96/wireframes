@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Popover, PopoverContent, PopoverTrigger } from '@/app/components/ui/popover';
+import { Calendar } from '@/app/components/ui/calendar';
+import { format } from 'date-fns';
 
 // ─── Site header ─────────────────────────────────────────────────────────────
 
@@ -15,9 +18,9 @@ export const Header: React.FC = () => {
 
   return (
     <header style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-ivory)', position: 'sticky', top: 0, zIndex: 50 }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '76px' }}>
         {/* Logo */}
-        <Link to="/" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 600, color: 'var(--color-anthracite)', letterSpacing: '-0.02em' }}>
+        <Link to="/" style={{ fontFamily: 'var(--font-display)', fontSize: '24px', fontWeight: 600, color: 'var(--color-anthracite)', letterSpacing: '-0.02em' }}>
           Séjours
         </Link>
 
@@ -30,7 +33,7 @@ export const Header: React.FC = () => {
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '15px',
-                fontWeight: 400,
+                fontWeight: 500,
                 color: location.pathname === link.to ? 'var(--color-terracotta)' : 'var(--color-taupe)',
                 transition: 'color 0.2s',
               }}
@@ -42,14 +45,18 @@ export const Header: React.FC = () => {
           <Link
             to="/login"
             className="btn-anim"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-taupe)', border: '1px solid var(--color-border)', padding: '8px 18px' }}
+            style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-taupe)', border: '1px solid var(--color-border)', padding: '9px 20px', borderRadius: 'var(--btn-radius)' }}
           >
             Connexion
           </Link>
           <Link
             to="/register"
             className="btn-anim"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '14px', background: 'var(--color-anthracite)', color: '#fff', padding: '8px 18px' }}
+            style={{
+              fontFamily: 'var(--font-body)', fontSize: '14px',
+              background: 'var(--color-anthracite)',
+              color: '#fff', padding: '9px 20px', borderRadius: 'var(--btn-radius)', fontWeight: 600,
+            }}
           >
             S'inscrire
           </Link>
@@ -263,3 +270,79 @@ export const Card: React.FC<{ children: React.ReactNode; style?: React.CSSProper
     {children}
   </div>
 );
+
+// ─── Search Bar Interactive Fields ─────────────────────────────────────────
+
+export const DateField: React.FC<{ label: string }> = ({ label }) => {
+  const [date, setDate] = useState<Date>();
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <div className="search-field-item" style={{ cursor: 'pointer' }}>
+          <span className="search-field-label">{label}</span>
+          <span className="search-field-input" style={{ color: date ? 'var(--color-anthracite)' : undefined }}>
+            {date ? format(date, 'dd/MM/yyyy') : 'jj/mm/aaaa'}
+          </span>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-auto rounded-none" style={{ background: '#fff', border: '1px solid var(--color-border)', padding: '16px' }}>
+        <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+const travelerOptions = [
+  { key: 'adultes', label: 'Adultes', desc: '13 ans ou plus' },
+  { key: 'enfants', label: 'Enfants', desc: '2–12 ans' },
+  { key: 'bebes', label: 'Bébés', desc: 'Moins de 2 ans' },
+  { key: 'animaux', label: 'Animaux', desc: 'Animaux domestiques' },
+];
+
+export const TravelerField: React.FC = () => {
+  const [counts, setCounts] = useState<Record<string, number>>({ adultes: 1, enfants: 0, bebes: 0, animaux: 0 });
+
+  const total = Object.values(counts).reduce((a, b) => a + b, 0);
+
+  const updateCount = (key: string, delta: number) => {
+    setCounts(prev => ({ ...prev, [key]: Math.max(0, (prev[key] || 0) + delta) }));
+  };
+
+  const btnStyle = (disabled?: boolean): React.CSSProperties => ({
+    width: '32px', height: '32px', borderRadius: '50%',
+    border: '1px solid var(--color-border)',
+    background: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    opacity: disabled ? 0.3 : 1, fontSize: '18px', lineHeight: 1,
+    transition: 'all 0.15s',
+  });
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <div className="search-field-item" style={{ cursor: 'pointer' }}>
+          <span className="search-field-label">Voyageurs</span>
+          <span className="search-field-input" style={{ color: total > 0 ? 'var(--color-anthracite)' : undefined }}>
+            {total > 0 ? `${total} voyageur${total > 1 ? 's' : ''}` : '1 voyageur'}
+          </span>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-[280px] rounded-none" style={{ background: '#fff', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-lg)', padding: '20px 24px' }}>
+        {travelerOptions.map(item => (
+          <div key={item.key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0' }}>
+            <div>
+              <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-anthracite)' }}>{item.label}</p>
+              <p style={{ fontSize: '12px', color: 'var(--color-taupe)' }}>{item.desc}</p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <button onClick={() => updateCount(item.key, -1)} disabled={counts[item.key] === 0} style={btnStyle(counts[item.key] === 0)}>−</button>
+              <span style={{ fontSize: '14px', fontWeight: 500, minWidth: '20px', textAlign: 'center' }}>{counts[item.key]}</span>
+              <button onClick={() => updateCount(item.key, 1)} style={btnStyle()}>+</button>
+            </div>
+          </div>
+        ))}
+      </PopoverContent>
+    </Popover>
+  );
+};

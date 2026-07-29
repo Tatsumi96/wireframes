@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Btn, ImgPlaceholder, Pill, SectionLabel, Divider } from '../components/Layout';
+import { Btn, ImgPlaceholder, Pill, SectionLabel, Divider, DateField, TravelerField } from '../components/Layout';
 import { PROPERTY_IMAGES, HERO_HOME_IMAGE, HOST_OWNER_IMAGE } from '../data/images';
 
 // Property card with strict equal height & smooth modern hover/zoom animations
@@ -30,17 +30,27 @@ const PropertyCard: React.FC<{ property: typeof PROPERTY_IMAGES[0] }> = ({ prope
   </Link>
 );
 
-// Hero search bar
+// Hero search bar — Airbnb style with calendars & traveler picker
 const SearchBar: React.FC = () => (
   <div className="hero-search-bar">
-    {[['Destination', 'Ville, région…'], ['Arrivée', 'jj / mm / aaaa'], ['Départ', 'jj / mm / aaaa']].map(([label, ph]) => (
-      <div key={label} className="search-field-item">
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 500, color: 'var(--color-taupe)', letterSpacing: '0.04em', marginBottom: '4px' }}>{label}</p>
-        <input placeholder={ph} style={{ background: 'none', border: 'none', outline: 'none', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-anthracite)', width: '100%' }} />
+    <div className="search-field-group">
+      <div className="search-field-item">
+        <span className="search-field-label">Destination</span>
+        <input placeholder="Ville, région…" className="search-field-input" />
       </div>
-    ))}
+      <div className="search-field-divider" />
+      <DateField label="Arrivée" />
+      <div className="search-field-divider" />
+      <DateField label="Départ" />
+      <div className="search-field-divider" />
+      <TravelerField />
+    </div>
     <div className="search-btn-wrapper">
       <Link to="/search" className="search-submit-btn btn-anim">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
         Rechercher
       </Link>
     </div>
